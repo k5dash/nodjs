@@ -15,6 +15,7 @@ function init() {
     $(".card").remove();
     gsap.timeline().restart();
 }
+
 (function() {
   "use strict";
   
@@ -32,7 +33,7 @@ function init() {
   }
 */ 
   function bindEvents() {
-    window.addEventListener('click', () => {
+    document.querySelector("body").addEventListener('click', () => {
       if (cardMap.length == 0){
           alert("没卡了!");
           return;
