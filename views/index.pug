@@ -1,5 +1,5 @@
 div#frame
-  button#reset.btn4 重新开始
+  button(type="button", class='btn4' onclick="init()" id="reset") 重新开始
   p Click anywhere to draw more cards!
   div#table
     div.card.card--sample
@@ -8,7 +8,7 @@ div#frame
 script
       include script.js
 script(src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js')
-
+script(src='https://code.jquery.com/jquery-3.6.0.min.js')
 style.
   :root {
     --bg: #f9f9f9;
@@ -116,3 +116,17 @@ style.
     background-image: url(https://previews.123rf.com/images/liliwhite/liliwhite1501/liliwhite150100021/35527583-luxury-silver-poker-background-with-card-symbols-ornament.jpg)
   }
   
+  .card__number--top-left{
+      position: absolute;
+      font-size: 30px;
+      top:5px;
+      left:10px;
+  }
+
+ .card__number--bottom-right{
+      position: absolute;
+      font-size: 30px;
+      bottom:5px;
+      right:10px;
+      transform: rotate(180deg)
+  }

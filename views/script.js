@@ -1,20 +1,21 @@
 console.clear();
-
+let table = document.getElementById('table'),
+cardWidth = 100, cardHeight = 150,
+cardCount = 1, startingHands = 0; 
+function init() {
+    // Initial draw
+    cardWidth = 100, cardHeight = 150,
+    cardCount = 1, startingHands = 0;
+    gsap.timeline().restart();
+    $(".card").remove();
+}
 (function() {
   "use strict";
   
   const symbols = ["♣", "♠", "♥", "♦"];
-  let table = document.getElementById('table'),
-      cardWidth = 100, cardHeight = 150,
-      cardCount = 1, startingHands = 0;
-  
-  function init() {
-    bindEvents();
-    
-    // Initial draw
-    start();
-  }
-  
+  const numbers = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  bindEvents();
+/*  
   function start() {
     if(startingHands < 3) {
       startingHands++;
@@ -23,7 +24,7 @@ console.clear();
       setTimeout(start, 1000);
     }
   }
-  
+*/ 
   function bindEvents() {
     window.addEventListener('click', () => {
       draw();
@@ -48,8 +49,8 @@ console.clear();
       .to(card, {
         duration: 1.5,
         ease: Power2.easeOut,      
-        x: position.x + getRandom(-offsetX, offsetX),
-        y: position.y + getRandom(-offsetY, offsetY),
+        x: position.x + getRandom(-offsetX, offsetX)*0.8,
+        y: position.y + getRandom(-offsetY, offsetY)*0.8,
       }, 'start')
       .to(card, {
         duration: 1.4,
@@ -62,9 +63,19 @@ console.clear();
     let card = document.createElement('div');
     card.className = 'card';
     let span = document.createElement('span');
-    span.className = 'card__symbol' + (Math.random() >= 0.5 ? ' card__symbol--red' : '');
+    let card_color = (Math.random() >= 0.5 ? ' card__symbol--red' : '')
+    span.className = 'card__symbol' + card_color;
     span.appendChild(document.createTextNode(getRandomSymbol()))
+    let number = document.createElement('span');
+    let card_value = Math.floor((Math.random()*numbers.length));
+    number.innerHTML = numbers[card_value];
+    number.className = "card__number--top-left "+ card_color;
     card.appendChild(span);
+    card.append(number);
+    number = document.createElement('span');
+    number.innerHTML = numbers[card_value];
+    number.className = "card__number--bottom-right "+card_color;
+    card.append(number);
     table.appendChild(card);
     
     return card;
