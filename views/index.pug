@@ -1,14 +1,15 @@
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js')
+script(src='https://code.jquery.com/jquery-3.6.0.min.js')
 div#frame
-  button(type="button", class='btn4' onclick="init()" id="reset") 重新开始
-  p Click anywhere to draw more cards!
+  div.header
+    button(type="button", class='btn4' onclick="init()" id="reset") 重新开始
+    p Click anywhere to draw more cards!
   div#table
     div.card.card--sample
       span.card__symbol.card__symbol--heart
-
 script
       include script.js
-script(async, defer, src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js')
-script(async, defer, src='https://code.jquery.com/jquery-3.6.0.min.js')
 style.
   :root {
     --bg: #f9f9f9;
@@ -24,10 +25,6 @@ style.
     background: var(--bg);
   }
   #reset {
-      position: fixed;
-      top:3.5%;;
-      left:50%;
-      transform:translateX(-50%)
   }
   .btn4 {
     font-family: 'Source Sans Pro', sans-serif;
@@ -66,12 +63,20 @@ style.
     perspective: 800px;
     transform-style: preserve-3d;
     overflow: hidden;
+    flex-direction: column;
   }
-  #frame> p {
+  #frame> div.header {
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  #frame> div.header> * {
+      margin-bottom:10px;
+  }
+  #frame> div.header> p {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 0.95em;
-    position: absolute;
-    top: 7.5%;
     width: 100%;
     letter-spacing: 4px;
     text-transform: uppercase;

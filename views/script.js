@@ -3,7 +3,7 @@ let table = document.getElementById('table'),
 cardWidth = 100, cardHeight = 150,
 cardCount = 1, startingHands = 0, cardMap=[];
 
-function init() {
+function init(firstload) {
     // Initial draw
     cardWidth = 100, cardHeight = 150,
     cardCount = 1, startingHands = 0;
@@ -12,8 +12,10 @@ function init() {
     for (var i = 0; i<52;i++){
         cardMap.push(i);
     }
-    $(".card").remove();
-    gsap.timeline().restart();
+    if (!firstload) {
+        $(".card").remove();
+        gsap.timeline().restart();
+    }
 }
 
 (function() {
@@ -113,6 +115,6 @@ function init() {
   }  
     
   
-  init();
+  init(true);
   
 })();
