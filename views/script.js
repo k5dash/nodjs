@@ -1,13 +1,19 @@
 console.clear();
 let table = document.getElementById('table'),
 cardWidth = 100, cardHeight = 150,
-cardCount = 1, startingHands = 0; 
+cardCount = 1, startingHands = 0, cardMap=[];
+
 function init() {
     // Initial draw
     cardWidth = 100, cardHeight = 150,
     cardCount = 1, startingHands = 0;
-    gsap.timeline().restart();
+    
+    cardMap=[];
+    for (var i = 0; i<52;i++){
+        cardMap.push(i);
+    }
     $(".card").remove();
+    gsap.timeline().restart();
 }
 (function() {
   "use strict";
@@ -27,6 +33,10 @@ function init() {
 */ 
   function bindEvents() {
     window.addEventListener('click', () => {
+      if (cardMap.length == 0){
+          alert("没卡了!");
+          return;
+      }
       draw();
     });
   }
@@ -63,11 +73,15 @@ function init() {
     let card = document.createElement('div');
     card.className = 'card';
     let span = document.createElement('span');
-    let card_color = (Math.random() >= 0.5 ? ' card__symbol--red' : '')
+    let index = Math.floor(Math.random() * cardMap.length);
+    let card_color = ((cardMap[index]<52/2) ? ' card__symbol--red' : '')
+    let card_value = cardMap[index]%13
     span.className = 'card__symbol' + card_color;
-    span.appendChild(document.createTextNode(getRandomSymbol()))
+    console.log(cardMap[index]);
+    span.appendChild(document.createTextNode(symbols[Math.floor(cardMap[index]/52 * symbols.length)]))
     let number = document.createElement('span');
-    let card_value = Math.floor((Math.random()*numbers.length));
+    cardMap.splice(index, 1);
+
     number.innerHTML = numbers[card_value];
     number.className = "card__number--top-left "+ card_color;
     card.appendChild(span);
